@@ -1,41 +1,26 @@
+// src/firebase.js
+
 // Import the functions you need from the SDKs you need
-
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
-import { getAnalytics } from "firebase/analytics";
-
-// TODO: Add SDKs for Firebase products that you want to use
-
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-
-
-// Your web app's Firebase configuration
-
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
+// Your web app's Firebase configuration using Environment Variables
 const firebaseConfig = {
-
-  apiKey: "AIzaSyCcgBG0-OUoDmhoeok3WXWfrKZ7iXSxky4",
-
-  authDomain: "shopswift-app.firebaseapp.com",
-
-  projectId: "shopswift-app",
-
-  storageBucket: "shopswift-app.firebasestorage.app",
-
-  messagingSenderId: "727136274260",
-
-  appId: "1:727136274260:web:f7cc274738ef431afceac1",
-
-  measurementId: "G-Z8Z8YL8B5Y"
-
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID 
 };
 
-
-
 // Initialize Firebase
-
 const app = initializeApp(firebaseConfig);
 
-const analytics = getAnalytics(app);
+// Initialize and export Firebase services for the rest of your app to use
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+export { db, auth };
